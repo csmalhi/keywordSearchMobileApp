@@ -1,22 +1,22 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import {connect} from 'react-redux';
-import HomeScreen from '../components/Home'
+import SearchComponent from '../components/Search'
 import DetailsScreen from '../components/Details'
 import CreatePostScreen from '../components/CreatePost'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function App() {
+function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="CreatePost" component={CreatePostScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Search" component={SearchComponent} />
+        <Tab.Screen name="Add New" component={DetailsScreen} />
+        <Tab.Screen name="Library" component={CreatePostScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch) => ({
   dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
