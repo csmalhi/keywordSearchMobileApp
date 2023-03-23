@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, StyleSheet, View, Button } from "react-native";
+import { StatusBar, StyleSheet, View, } from "react-native";
 import Lists from "./Lists";
 import Media from "./Media";
 import Speech from "./Speech";
@@ -136,7 +136,7 @@ export default function SearchComponent({ navigation, route }) {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media selectedItem={DATA.Lions[0]} />
+      <Media editMode={false} selectedItem={DATA.Lions[0]} />
       <Lists lists={DATA} />
 
       {/* <Button

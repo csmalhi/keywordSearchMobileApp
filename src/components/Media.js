@@ -1,11 +1,14 @@
 import { View, StyleSheet, Image, Text } from "react-native";
 import React from "react";
 import { Chip } from "@react-native-material/core";
+import Edit from "./Edit";
 
-export default Media = ({ selectedItem }) => {
-  return (
-    <View style={[styles.media]}>
-      <Image style={[styles.image]} src={selectedItem.image}></Image>
+export default Media = ({ selectedItem, editMode }) => {
+  let info;
+  if (editMode) {
+    info = <Edit />;
+  } else {
+    info = (
       <View style={[styles.info]}>
         <Text style={[styles.title]}>{selectedItem.name}</Text>
         <Text style={[styles.description]}>{selectedItem.description}</Text>
@@ -15,13 +18,19 @@ export default Media = ({ selectedItem }) => {
           })}
         </Text>
       </View>
+    );
+  }
+  return (
+    <View style={[styles.media]}>
+      <Image style={[styles.image]} src={selectedItem.image}></Image>
+      {info}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   media: {
-    height: 300,
+    height: 350,
     width: "100%",
     padding: 5,
     backgroundColor: "#fff",
@@ -35,7 +44,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 10,
     fontWeight: "300",
-    marginBottom: 30,
+    marginBottom: 20,
   },
   info: {
     padding: 5,
