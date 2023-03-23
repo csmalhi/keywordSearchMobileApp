@@ -11,6 +11,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import Item from './Item'
 
 const DATA = {
   Lions: [
@@ -133,18 +134,6 @@ const DATA = {
   ],
 };
 
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item]}>
-    <Image style={[styles.image]} src={item.image}></Image>
-    <View style={[styles.info]}>
-      <Text style={[styles.title]}>{item.name}</Text>
-      {/* <Text style={[styles.description]}>{item.description}</Text> */}
-      <Text style={[styles.keywords]}>
-        {item.keywords.map((keyword) => keyword.name).join(", ")}
-      </Text>
-    </View>
-  </TouchableOpacity>
-);
 
 const renderItem = ({ item }) => {
   // const [selectedId, setSelectedId] = useState();
@@ -183,11 +172,16 @@ const Lists = ({ lists }) => {
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
+      style={[styles.scroll]}
     >
       {sortedLists}
     </ScrollView>
   )
 };
+
+const Media = (({ selectedId }) => {
+  return (<View style={[styles.media]}></View>)
+})
 
 export default function SearchComponent({ navigation, route }) {
   React.useEffect(() => {
@@ -204,7 +198,7 @@ export default function SearchComponent({ navigation, route }) {
           You will see your speech dictation and keywords match up here
         </Text>
       </View>
-      <View style={[styles.media]}></View>
+      <Media />
       <Lists lists={DATA} />
 
       {/* <Button
@@ -223,7 +217,7 @@ const styles = StyleSheet.create({
   item: {
     marginVertical: 5,
     marginHorizontal: 5,
-    backgroundColor: "#eee",
+    backgroundColor: "#fff",
     borderRadius: 10,
     width: 100,
     shadowOpacity: 0.15,
@@ -232,18 +226,21 @@ const styles = StyleSheet.create({
       height: 1,
     },
     shadowRadius: 1,
+    overflow: "hidden",
   },
   media: {
     height: 200,
     width: "100%",
     padding: 10,
     backgroundColor: "#fff",
-    borderRadius: 10
+    borderRadius: 10,
+    margin: 5,
+    marginBottom: 5
   },
   title: {
     fontSize: 10,
     fontWeight: "600",
-    fontFamily: "Fredoka",
+    fontFamily: "Roboto",
   },
   keywords: {
     fontSize: 8,
@@ -258,25 +255,21 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 14,
     fontWeight: "600",
-    fontFamily: "Fredoka",
+    fontFamily: "Roboto",
   },
   listsContainer: {
     height: 120,
     width: "100%",
-    // alignItems: "start",
     marginBottom: 10,
   },
   search: {
     backgroundColor: "#eee",
     height: 60,
-    marginBottom: 10,
     width: "100%",
     padding: 10,
   },
   searchContainer: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "flex-start",
     paddingTop: 20,
   },
   searchText: {
@@ -294,4 +287,7 @@ const styles = StyleSheet.create({
   info: {
     padding: 5,
   },
+  scroll: {
+    paddingTop: 10
+  }
 });

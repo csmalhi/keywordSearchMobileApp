@@ -25,6 +25,7 @@ class NoteTaker extends Component {
       Inconsolata: require('./assets/fonts/Inconsolata.ttf'),
       JosefinSans: require('./assets/fonts/JosefinSans.ttf'),
       JosefinSansItalic: require('./assets/fonts/JosefinSansItalic.ttf'),
+      Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
     });
     this.setState({ fontsLoaded: true });
   }
