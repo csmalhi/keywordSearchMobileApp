@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
-  Text,
   View,
   Button,
-  FlatList,
-  Image,
-  ScrollView,
 } from "react-native";
-import Item from './Item'
+import Lists from './Lists'
+import Media from './Media'
+import Speech from './Speech'
 
 const DATA = {
   Lions: [
@@ -134,55 +130,6 @@ const DATA = {
   ],
 };
 
-
-const renderItem = ({ item }) => {
-  // const [selectedId, setSelectedId] = useState();
-  // const backgroundColor = item.id === selectedId ? "#222" : "#555";
-  // const color = item.id === selectedId ? "white" : "black";
-  return (
-    <Item
-      item={item}
-      onPress={() => setSelectedId(item.id)}
-      backgroundColor={"#fff"}
-    />
-  );
-};
-
-const Lists = ({ lists }) => {
-  let sortedLists = Object.keys(lists)
-    .sort()
-    .map((keyword) => {
-      return (
-        <View
-          style={[styles.listsContainer]}
-          key={keyword}
-        >
-          <Text style={[styles.keywordTitle]}>{keyword}</Text>
-          <FlatList
-            data={lists[keyword]}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            horizontal
-            width={"100%"}
-          />
-        </View>
-      );
-    });
-
-  return (
-    <ScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      style={[styles.scroll]}
-    >
-      {sortedLists}
-    </ScrollView>
-  )
-};
-
-const Media = (({ selectedId }) => {
-  return (<View style={[styles.media]}></View>)
-})
-
 export default function SearchComponent({ navigation, route }) {
   React.useEffect(() => {
     if (route.params?.post) {
@@ -192,12 +139,8 @@ export default function SearchComponent({ navigation, route }) {
   }, [route.params?.post]);
 
   return (
-    <View style={[styles.searchContainer]}>
-      <View style={[styles.search]}>
-        <Text style={[styles.searchText]}>
-          You will see your speech dictation and keywords match up here
-        </Text>
-      </View>
+    <View style={[styles.container]}>
+      <Speech />
       <Media />
       <Lists lists={DATA} />
 
@@ -213,79 +156,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    marginVertical: 5,
-    marginHorizontal: 5,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    width: 100,
-    shadowOpacity: 0.15,
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowRadius: 1,
-    overflow: "hidden",
-  },
-  media: {
-    height: 200,
-    width: "100%",
-    padding: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    margin: 5,
-    marginBottom: 5
-  },
-  title: {
-    fontSize: 10,
-    fontWeight: "600",
-    fontFamily: "Roboto",
-  },
-  keywords: {
-    fontSize: 8,
-    fontWeight: "300",
-    color: "#444",
-  },
-  description: {
-    fontSize: 10,
-    fontWeight: "300",
-  },
-  keywordTitle: {
-    marginLeft: 5,
-    fontSize: 14,
-    fontWeight: "600",
-    fontFamily: "Roboto",
-  },
-  listsContainer: {
-    height: 120,
-    width: "100%",
-    marginBottom: 10,
-  },
-  search: {
-    backgroundColor: "#eee",
-    height: 60,
-    width: "100%",
-    padding: 10,
-  },
-  searchContainer: {
-    flex: 1,
     paddingTop: 20,
-  },
-  searchText: {
-    color: "#222",
-    fontFamily: "Inconsolata",
-    fontSize: 18,
-    lineHeight: 20,
-  },
-  image: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: "cover",
-  },
-  info: {
-    padding: 5,
   },
   scroll: {
     paddingTop: 10
