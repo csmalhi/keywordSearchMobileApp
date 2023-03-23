@@ -8,7 +8,7 @@ import {
   View,
   Button,
   FlatList,
-  List,
+  Image
 } from "react-native";
 
 const DATA = {
@@ -137,9 +137,12 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
     onPress={onPress}
     style={[styles.item]}
   >
-    <Text style={[styles.title]}>{item.name}</Text>
-    <Text style={[styles.description]}>{item.description}</Text>
-    <Text style={[styles.keywords]}>Keywords: {item.keywords.map(keyword => keyword.name).join(' ')}</Text>
+    <Image style={[styles.image]} src={item.image}></Image>
+    <View style={[styles.info]}>
+      <Text style={[styles.title]}>{item.name}</Text>
+      {/* <Text style={[styles.description]}>{item.description}</Text> */}
+      <Text style={[styles.keywords]}>{item.keywords.map(keyword => keyword.name).join(' ')}</Text>
+    </View>
   </TouchableOpacity>
 
 );
@@ -172,6 +175,7 @@ const Lists = ({ lists }) => {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             horizontal
+            width={'100%'}
           />
         </SafeAreaView>
       );
@@ -215,20 +219,27 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    padding: 5,
     marginVertical: 5,
     marginHorizontal: 5,
-    backgroundColor: '#ddd',
+    backgroundColor: '#eee',
     borderRadius: 10,
-    width: 100
+    width: 100,
+    shadowOpacity: .15,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 1
   },
   title: {
-    fontSize: 12,
-    fontWeight: '700'
+    fontSize: 10,
+    fontWeight: '600',
+    fontFamily: 'Fredoka'
   },
   keywords: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: '300',
+    color: '#444'
   },
   description: {
     fontSize: 10,
@@ -237,17 +248,18 @@ const styles = StyleSheet.create({
   keywordTitle: {
     marginLeft: 10,
     fontSize: 14,
-    fontWeight: '500'
+    fontWeight: '500',
+    fontFamily: 'Fredoka'
   },
   search: {
-    backgroundColor: "#222",
-    height: 80,
+    backgroundColor: "#111",
+    height: 70,
     padding: 10,
     marginBottom: 10,
-    width: '100%'
+    width: '100%',
   },
   listsContainer: {
-    height: 100,
+    height: 120,
     width: "100%",
     alignItems: "start",
     padding: 5,
@@ -257,9 +269,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 10,
   },
   searchText: {
-    color: '#eee'
+    color: '#eee',
+    fontFamily: 'Inconsolata'
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  info: {
+    padding: 5
   }
 });
