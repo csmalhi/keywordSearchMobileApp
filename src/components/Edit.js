@@ -15,42 +15,41 @@ export default Item = ({ item, onPress }) => (
 );
 
 const styles = StyleSheet.create({
-    item: {
-      marginVertical: 5,
-      marginHorizontal: 5,
-      backgroundColor: "#fff",
-      borderRadius: 10,
-      width: 100,
-      shadowOpacity: 0.15,
-      shadowOffset: {
-        width: 1,
-        height: 1,
-      },
-      shadowRadius: 1,
-      overflow: "hidden",
+  item: {
+    marginVertical: 5,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    width: 100,
+    shadowOpacity: 0.15,
+    shadowOffset: {
+      width: 1,
+      height: 1,
     },
-    keywords: {
-      fontSize: 8,
-      fontWeight: "300",
-      color: "#444",
-    },
-    description: {
-      fontSize: 10,
-      fontWeight: "300",
-    },
-    image: {
-      flex: 1,
-      width: null,
-      height: null,
-      resizeMode: "cover",
-    },
-    info: {
-      padding: 5,
-    },
-    title: {
-        fontSize: 10,
-        fontWeight: "600",
-        fontFamily: "Roboto",
-    },
-  });
-  
+    shadowRadius: 1,
+    overflow: "hidden",
+  },
+  keywords: {
+    fontSize: 8,
+    fontWeight: "300",
+    color: "#444",
+  },
+  description: {
+    fontSize: 10,
+    fontWeight: "300",
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: "cover",
+  },
+  info: {
+    padding: 5,
+  },
+  title: {
+    fontSize: 10,
+    fontWeight: "600",
+    fontFamily: "Roboto",
+  },
+});

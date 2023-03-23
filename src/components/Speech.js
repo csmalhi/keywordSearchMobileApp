@@ -3,10 +3,10 @@ import React from "react";
 
 export default Speech = () => (
   <View style={[styles.search]}>
-  <Text style={[styles.searchText]}>
-    You will see your speech dictation and keywords match up here
-  </Text>
-</View>
+    <Text style={[styles.searchText]}>
+      You will see your speech dictation and keywords match up here
+    </Text>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -21,6 +21,5 @@ const styles = StyleSheet.create({
     height: 60,
     width: "100%",
     padding: 10,
-  }
+  },
 });
-  

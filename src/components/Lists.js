@@ -1,6 +1,6 @@
 import { Text, View, FlatList, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
-import Item from './Item'
+import Item from "./Item";
 
 const renderItem = ({ item }) => {
   // const [selectedId, setSelectedId] = useState();
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   scroll: {
-    paddingTop: 10
+    paddingTop: 10,
   },
   keywordTitle: {
     marginLeft: 5,

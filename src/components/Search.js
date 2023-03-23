@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  StatusBar,
-  StyleSheet,
-  View,
-  Button,
-} from "react-native";
-import Lists from './Lists'
-import Media from './Media'
-import Speech from './Speech'
+import { StatusBar, StyleSheet, View, Button } from "react-native";
+import Lists from "./Lists";
+import Media from "./Media";
+import Speech from "./Speech";
 
 const DATA = {
   Lions: [
@@ -141,7 +136,7 @@ export default function SearchComponent({ navigation, route }) {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media />
+      <Media selectedItem={DATA.Lions[0]} />
       <Lists lists={DATA} />
 
       {/* <Button
@@ -159,6 +154,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   scroll: {
-    paddingTop: 10
-  }
+    paddingTop: 10,
+  },
 });

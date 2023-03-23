@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import {connect} from 'react-redux';
-import SearchComponent from '../components/Search'
-import DetailsScreen from '../components/Details'
-import CreatePostScreen from '../components/CreatePost'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { connect } from "react-redux";
+import SearchComponent from "../components/Search";
+import DetailsScreen from "../components/Details";
+import CreatePostScreen from "../components/CreatePost";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  state
+  state,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch
+  dispatch,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Router);

@@ -1,18 +1,17 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux';
-import {initStore} from './src/redux/store/store'
-import * as Font from 'expo-font';
-import Router from './src/pages/Router';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import { initStore } from "./src/redux/store/store";
+import * as Font from "expo-font";
+import Router from "./src/pages/Router";
 
 const store = initStore();
-
 
 class NoteTaker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        fontsLoaded: false
-    }
+      fontsLoaded: false,
+    };
   }
 
   componentDidMount() {
@@ -21,16 +20,16 @@ class NoteTaker extends Component {
 
   async loadFonts() {
     await Font.loadAsync({
-      Fredoka: require('./assets/fonts/Fredoka.ttf'),
-      Inconsolata: require('./assets/fonts/Inconsolata.ttf'),
-      JosefinSans: require('./assets/fonts/JosefinSans.ttf'),
-      JosefinSansItalic: require('./assets/fonts/JosefinSansItalic.ttf'),
-      Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
+      Fredoka: require("./assets/fonts/Fredoka.ttf"),
+      Inconsolata: require("./assets/fonts/Inconsolata.ttf"),
+      JosefinSans: require("./assets/fonts/JosefinSans.ttf"),
+      JosefinSansItalic: require("./assets/fonts/JosefinSansItalic.ttf"),
+      Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
     });
     this.setState({ fontsLoaded: true });
   }
 
-  render () {
+  render() {
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
