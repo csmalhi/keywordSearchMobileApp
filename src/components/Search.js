@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  FlatList,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -8,6 +7,8 @@ import {
   Text,
   View,
   Button,
+  FlatList,
+  List,
 } from "react-native";
 
 const DATA = {
@@ -136,59 +137,52 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
     onPress={onPress}
     style={[styles.item, { backgroundColor }]}
   >
-    <Text style={[styles.title, { color: textColor }]}>{item.name}</Text>
+    <Text style={[styles.title, { color: textColor }]}>{item.title}</Text>
   </TouchableOpacity>
+
 );
 
 const renderItem = ({ item }) => {
-  const [selectedId, setSelectedId] = useState();
-
-  const backgroundColor = item.id === selectedId ? "#222" : "#555";
-  const color = item.id === selectedId ? "white" : "black";
-  console.log("----------", item);
+  // const [selectedId, setSelectedId] = useState();
+  // const backgroundColor = item.id === selectedId ? "#222" : "#555";
+  // const color = item.id === selectedId ? "white" : "black";
   return (
     <Item
       item={item}
       onPress={() => setSelectedId(item.id)}
-      backgroundColor={backgroundColor}
-      textColor={color}
+      backgroundColor={'#222'}
+      textColor={'#ccc'}
     />
   );
 };
 
 const Lists = ({ lists }) => {
-  Object.keys(lists)
-    .sort()
-    .map((keyword) => {
-      console.log("--------keyword", lists[keyword]);
-    });
   let sortedLists = Object.keys(lists)
     .sort()
     .map((keyword) => {
       return (
-        <FlatList
-          data={lists[keyword]}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          horizontal={true}
+        <SafeAreaView
+          style={{
+            backgroundColor: "#333",
+            height: 100,
+            width: "100%",
+            alignItems: "start",
+            padding: 20,
+            marginBottom: 10
+          }}
           key={keyword}
-        />
+        >
+          <FlatList
+            data={lists[keyword]}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            horizontal
+          />
+        </SafeAreaView>
       );
     });
 
-  return (
-    <View
-      style={{
-        backgroundColor: "#333",
-        height: 100,
-        width: "100%",
-        alignItems: "center",
-        padding: 20,
-      }}
-    >
-      <Text style={{ color: "#ddd" }}>TEST</Text>
-    </View>
-  );
+  return sortedLists;
 };
 
 export default function SearchComponent({ navigation, route }) {
@@ -222,6 +216,7 @@ export default function SearchComponent({ navigation, route }) {
         </Text>
       </View>
       <Lists lists={DATA} />
+
       {/* <Button
         title="Create post"
         onPress={() => navigation.navigate("CreatePost")}
