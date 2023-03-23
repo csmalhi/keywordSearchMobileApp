@@ -135,9 +135,11 @@ const DATA = {
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity
     onPress={onPress}
-    style={[styles.item, { backgroundColor }]}
+    style={[styles.item]}
   >
-    <Text style={[styles.title, { color: textColor }]}>{item.title}</Text>
+    <Text style={[styles.title]}>{item.name}</Text>
+    <Text style={[styles.description]}>{item.description}</Text>
+    <Text style={[styles.keywords]}>Keywords: {item.keywords.map(keyword => keyword.name).join(' ')}</Text>
   </TouchableOpacity>
 
 );
@@ -150,8 +152,7 @@ const renderItem = ({ item }) => {
     <Item
       item={item}
       onPress={() => setSelectedId(item.id)}
-      backgroundColor={'#222'}
-      textColor={'#ccc'}
+      backgroundColor={'#fff'}
     />
   );
 };
@@ -162,16 +163,10 @@ const Lists = ({ lists }) => {
     .map((keyword) => {
       return (
         <SafeAreaView
-          style={{
-            backgroundColor: "#333",
-            height: 100,
-            width: "100%",
-            alignItems: "start",
-            padding: 20,
-            marginBottom: 10
-          }}
+          style={[styles.listsContainer]}
           key={keyword}
         >
+          <Text style={[styles.keywordTitle]}>{keyword}</Text>
           <FlatList
             data={lists[keyword]}
             renderItem={renderItem}
@@ -195,23 +190,12 @@ export default function SearchComponent({ navigation, route }) {
 
   return (
     <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        paddingTop: 30,
-      }}
+      style={[styles.searchContainer]}
     >
       <View
-        name="search-bar"
-        style={{
-          backgroundColor: "#222",
-          height: 100,
-          padding: 20,
-          borderRadius: 10,
-          marginBottom: 10,
-        }}
+        style={[styles.search]}
       >
-        <Text style={{ color: "#ddd" }}>
+        <Text style={[styles.searchText]}>
           You will see your speech dictation and keywords match up here
         </Text>
       </View>
@@ -231,11 +215,51 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    padding: 5,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    backgroundColor: '#ddd',
+    borderRadius: 10,
+    width: 100
   },
   title: {
-    fontSize: 32,
+    fontSize: 12,
+    fontWeight: '700'
   },
+  keywords: {
+    fontSize: 10,
+    fontWeight: '300',
+  },
+  description: {
+    fontSize: 10,
+    fontWeight: '300'
+  },
+  keywordTitle: {
+    marginLeft: 10,
+    fontSize: 14,
+    fontWeight: '500'
+  },
+  search: {
+    backgroundColor: "#222",
+    height: 80,
+    padding: 10,
+    marginBottom: 10,
+    width: '100%'
+  },
+  listsContainer: {
+    height: 100,
+    width: "100%",
+    alignItems: "start",
+    padding: 5,
+    marginBottom: 10
+  },
+  searchContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: 10,
+  },
+  searchText: {
+    color: '#eee'
+  }
 });
