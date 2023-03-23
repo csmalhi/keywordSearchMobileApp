@@ -9,10 +9,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
-function Nav() {
+function Router() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Search" component={SearchComponent} />
         <Tab.Screen name="Add New" component={DetailsScreen} />
         <Tab.Screen name="Library" component={CreatePostScreen} />
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch) => ({
   dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Router);

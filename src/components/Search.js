@@ -8,7 +8,8 @@ import {
   View,
   Button,
   FlatList,
-  Image
+  Image,
+  ScrollView,
 } from "react-native";
 
 const DATA = {
@@ -133,18 +134,16 @@ const DATA = {
 };
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={[styles.item]}
-  >
+  <TouchableOpacity onPress={onPress} style={[styles.item]}>
     <Image style={[styles.image]} src={item.image}></Image>
     <View style={[styles.info]}>
       <Text style={[styles.title]}>{item.name}</Text>
       {/* <Text style={[styles.description]}>{item.description}</Text> */}
-      <Text style={[styles.keywords]}>{item.keywords.map(keyword => keyword.name).join(' ')}</Text>
+      <Text style={[styles.keywords]}>
+        {item.keywords.map((keyword) => keyword.name).join(", ")}
+      </Text>
     </View>
   </TouchableOpacity>
-
 );
 
 const renderItem = ({ item }) => {
@@ -155,7 +154,7 @@ const renderItem = ({ item }) => {
     <Item
       item={item}
       onPress={() => setSelectedId(item.id)}
-      backgroundColor={'#fff'}
+      backgroundColor={"#fff"}
     />
   );
 };
@@ -165,7 +164,7 @@ const Lists = ({ lists }) => {
     .sort()
     .map((keyword) => {
       return (
-        <SafeAreaView
+        <View
           style={[styles.listsContainer]}
           key={keyword}
         >
@@ -175,13 +174,19 @@ const Lists = ({ lists }) => {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             horizontal
-            width={'100%'}
+            width={"100%"}
           />
-        </SafeAreaView>
+        </View>
       );
     });
 
-  return sortedLists;
+  return (
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+    >
+      {sortedLists}
+    </ScrollView>
+  )
 };
 
 export default function SearchComponent({ navigation, route }) {
@@ -193,16 +198,13 @@ export default function SearchComponent({ navigation, route }) {
   }, [route.params?.post]);
 
   return (
-    <View
-      style={[styles.searchContainer]}
-    >
-      <View
-        style={[styles.search]}
-      >
+    <View style={[styles.searchContainer]}>
+      <View style={[styles.search]}>
         <Text style={[styles.searchText]}>
           You will see your speech dictation and keywords match up here
         </Text>
       </View>
+      <View style={[styles.media]}></View>
       <Lists lists={DATA} />
 
       {/* <Button
@@ -221,66 +223,75 @@ const styles = StyleSheet.create({
   item: {
     marginVertical: 5,
     marginHorizontal: 5,
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
     borderRadius: 10,
     width: 100,
-    shadowOpacity: .15,
+    shadowOpacity: 0.15,
     shadowOffset: {
       width: 1,
       height: 1,
     },
-    shadowRadius: 1
+    shadowRadius: 1,
+  },
+  media: {
+    height: 200,
+    width: "100%",
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 10
   },
   title: {
     fontSize: 10,
-    fontWeight: '600',
-    fontFamily: 'Fredoka'
+    fontWeight: "600",
+    fontFamily: "Fredoka",
   },
   keywords: {
     fontSize: 8,
-    fontWeight: '300',
-    color: '#444'
+    fontWeight: "300",
+    color: "#444",
   },
   description: {
     fontSize: 10,
-    fontWeight: '300'
+    fontWeight: "300",
   },
   keywordTitle: {
-    marginLeft: 10,
+    marginLeft: 5,
     fontSize: 14,
-    fontWeight: '500',
-    fontFamily: 'Fredoka'
-  },
-  search: {
-    backgroundColor: "#111",
-    height: 70,
-    padding: 10,
-    marginBottom: 10,
-    width: '100%',
+    fontWeight: "600",
+    fontFamily: "Fredoka",
   },
   listsContainer: {
     height: 120,
     width: "100%",
-    alignItems: "start",
-    padding: 5,
-    marginBottom: 10
+    // alignItems: "start",
+    marginBottom: 10,
+  },
+  search: {
+    backgroundColor: "#eee",
+    height: 60,
+    marginBottom: 10,
+    width: "100%",
+    padding: 10,
   },
   searchContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    // alignItems: "center",
+    // justifyContent: "flex-start",
+    paddingTop: 20,
   },
   searchText: {
-    color: '#eee',
-    fontFamily: 'Inconsolata'
+    color: "#222",
+    fontFamily: "Inconsolata",
+    fontSize: 18,
+    lineHeight: 20,
   },
   image: {
     flex: 1,
     width: null,
     height: null,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   info: {
-    padding: 5
-  }
+    padding: 5,
+  },
 });

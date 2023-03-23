@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import {initStore} from './src/redux/store/store'
 import * as Font from 'expo-font';
-import Nav from './src/pages/Nav';
+import Router from './src/pages/Router';
 
 const store = initStore();
 
@@ -23,6 +23,8 @@ class NoteTaker extends Component {
     await Font.loadAsync({
       Fredoka: require('./assets/fonts/Fredoka.ttf'),
       Inconsolata: require('./assets/fonts/Inconsolata.ttf'),
+      JosefinSans: require('./assets/fonts/JosefinSans.ttf'),
+      JosefinSansItalic: require('./assets/fonts/JosefinSansItalic.ttf'),
     });
     this.setState({ fontsLoaded: true });
   }
@@ -31,7 +33,7 @@ class NoteTaker extends Component {
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
-          <Nav />
+          <Router />
         </Provider>
       );
     } else {
