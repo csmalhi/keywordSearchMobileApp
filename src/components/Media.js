@@ -1,22 +1,30 @@
-import { View, StyleSheet, Image, Text } from "react-native";
-import React from "react";
-import { Chip } from "@react-native-material/core";
+import { View, StyleSheet, Image } from "react-native";
+import React, {useState} from "react";
 import Edit from "./Edit";
+import { Text, Button, Chip, Flex } from "@react-native-material/core";
 
-export default Media = ({ selectedItem, editMode }) => {
+export default Media = ({ selectedItem, edit }) => {
+  const [editMode, setEditMode] = useState(edit);
+
   let info;
   if (editMode) {
-    info = <Edit />;
+    info = <Edit toggleEditMode={setEditMode} />;
   } else {
     info = (
       <View style={[styles.info]}>
         <Text style={[styles.title]}>{selectedItem.name}</Text>
         <Text style={[styles.description]}>{selectedItem.description}</Text>
-        <Text style={[styles.keywords]}>
-          {selectedItem.keywords.map((keyword) => {
-            return <Chip key={keyword.name} label={keyword.name}></Chip>;
-          })}
-        </Text>
+        <Flex direction="row" justify="between">
+          <Text style={[styles.keywords]}>
+            {selectedItem.keywords.map((keyword) => {
+              return <Chip key={keyword.name} label={keyword.name}></Chip>;
+            })}
+          </Text>
+          <Button
+            title="Edit"
+            onPress={() => setEditMode(true)}
+          />
+        </Flex>
       </View>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
-import { Stack, TextInput,  } from "@react-native-material/core";
+import { Stack, TextInput, Button  } from "@react-native-material/core";
 
-export default Edit = ({selectedItem}) => (
+export default Edit = ({toggleEditMode}) => (
   <Stack spacing={2} >
     <TextInput
       label="Name"
@@ -19,5 +19,8 @@ export default Edit = ({selectedItem}) => (
       label="Description"
       variant="outlined"
     />
+    <Button title={'Cancel'}             
+      onPress={() => toggleEditMode(false)}
+    ></Button>
   </Stack>
 );

@@ -136,7 +136,7 @@ export default function SearchComponent({ navigation, route }) {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media editMode={false} selectedItem={DATA.Lions[0]} />
+      <Media selectedItem={DATA.Lions[0]} />
       <Lists lists={DATA} />
 
       {/* <Button

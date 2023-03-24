@@ -1,5 +1,7 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
+import { Text } from "@react-native-material/core";
+
 
 export default Speech = () => (
   <View style={[styles.search]}>
