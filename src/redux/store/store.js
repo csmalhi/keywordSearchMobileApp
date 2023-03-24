@@ -16,6 +16,4 @@ const composedEnhancer = compose(
 
 const initStore = () => createStore(rootReducer, {}, composedEnhancer);
 
-module.exports = {
-  initStore,
-};
+export default initStore

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { initStore } from "./src/redux/store/store";
+import initStore from "./src/redux/store/store";
 import * as Font from "expo-font";
 import Router from "./src/pages/Router";
 

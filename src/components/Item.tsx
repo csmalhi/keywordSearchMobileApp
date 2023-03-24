@@ -5,11 +5,11 @@ import { Keyword } from "../models/keyword";
 
 export type Props = {
   item: Resource;
-  onPress: any;
+  onSelect: any;
 };
 
-const Item: React.FC<Props> = ({ item, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item]}>
+const Item: React.FC<Props> = ({ item, onSelect }) => (
+  <TouchableOpacity onPress={onSelect} style={[styles.item]}>
     <Image style={[styles.image]} source={{
           uri: item.image,
         }}></Image>

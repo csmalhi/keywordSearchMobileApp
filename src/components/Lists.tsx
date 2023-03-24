@@ -15,17 +15,20 @@ export type Props = {
 
 const renderItem: React.FC<RenderProps> = ({ item, setSelectedId }) => {
   // const [selectedId, setSelectedId] = useState();
+
   // const backgroundColor = item.id === selectedId ? "#222" : "#555";
   // const color = item.id === selectedId ? "white" : "black";
   return (
     <Item
       item={item}
-      onPress={() => setSelectedId(item.id)}
+      onSelect={() => setSelectedId(item.id)}
     />
   );
 };
 
 const Lists: React.FC<Props> = ({ lists }) => {
+  const [selectedId, setSelectedId] = useState();
+
   let sortedLists = Object.keys(lists)
     .sort()
     .map((keyword: string) => {

@@ -125,7 +125,11 @@ const DATA = {
   ],
 };
 
-export default function SearchComponent({ navigation, route }) {
+export type Props = {
+  navigation: any;
+  route: any;
+};
+const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
@@ -136,7 +140,7 @@ export default function SearchComponent({ navigation, route }) {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media selectedItem={DATA.Lions[0]} />
+      <Media selectedItem={DATA.Lions[0]} edit={false} />
       <Lists lists={DATA} />
 
       {/* <Button
@@ -157,3 +161,5 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
+
+export default SearchComponent;

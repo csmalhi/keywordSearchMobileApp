@@ -1,9 +1,14 @@
 import { View, StyleSheet, Image } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Edit from "./Edit";
 import { Text, Button, Chip, Flex } from "@react-native-material/core";
 
-export default Media = ({ selectedItem, edit }) => {
+export type Props = {
+  selectedItem: Resource;
+  edit: boolean
+};
+
+const Media: React.FC<Props> = ({ selectedItem, edit }) => {
   const [editMode, setEditMode] = useState(edit);
 
   let info;
@@ -30,7 +35,9 @@ export default Media = ({ selectedItem, edit }) => {
   }
   return (
     <View style={[styles.media]}>
-      <Image style={[styles.image]} src={selectedItem.image}></Image>
+      <Image style={[styles.image]} source={{
+        uri: selectedItem.image,
+      }}></Image>
       {info}
     </View>
   );
@@ -45,8 +52,8 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: null,
-    height: null,
+    width: undefined,
+    height: undefined,
     resizeMode: "cover",
   },
   description: {
@@ -64,3 +71,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default Media;
