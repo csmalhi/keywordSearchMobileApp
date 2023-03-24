@@ -1,7 +1,11 @@
 import React from "react";
 import { Stack, TextInput, Button  } from "@react-native-material/core";
 
-export default Edit = ({toggleEditMode}) => (
+export type Props = {
+  toggleEditMode: any;
+};
+
+const Edit: React.FC<Props> = ({toggleEditMode}) => (
   <Stack spacing={2} >
     <TextInput
       label="Name"
@@ -24,3 +28,5 @@ export default Edit = ({toggleEditMode}) => (
     ></Button>
   </Stack>
 );
+
+export default Edit;

@@ -1,13 +1,22 @@
 import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
+import { Resource } from '../models/resources';
+import { Keyword } from "../models/keyword";
 
-export default Item = ({ item, onPress }) => (
+export type Props = {
+  item: Resource;
+  onPress: any;
+};
+
+const Item: React.FC<Props> = ({ item, onPress }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item]}>
-    <Image style={[styles.image]} src={item.image}></Image>
+    <Image style={[styles.image]} source={{
+          uri: item.image,
+        }}></Image>
     <View style={[styles.info]}>
       <Text style={[styles.title]}>{item.name}</Text>
       <Text style={[styles.keywords]}>
-        {item.keywords.map((keyword) => keyword.name).join(", ")}
+        {item.keywords.map((keyword: Keyword) => keyword.name).join(", ")}
       </Text>
     </View>
   </TouchableOpacity>
@@ -39,8 +48,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: null,
-    height: null,
     resizeMode: "cover",
   },
   info: {
@@ -52,3 +59,5 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
   },
 });
+
+export default Item;

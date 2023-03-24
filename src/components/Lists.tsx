@@ -1,8 +1,19 @@
 import { Text, View, FlatList, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import Item from "./Item";
+import { Library, Resource } from "../models/resources";
+import { Keyword } from "../models/keyword";
 
-const renderItem = ({ item }) => {
+export type RenderProps = {
+  item: Resource;
+  setSelectedId: any;
+};
+
+export type Props = {
+  lists: Library;
+};
+
+const renderItem: React.FC<RenderProps> = ({ item, setSelectedId }) => {
   // const [selectedId, setSelectedId] = useState();
   // const backgroundColor = item.id === selectedId ? "#222" : "#555";
   // const color = item.id === selectedId ? "white" : "black";
@@ -10,15 +21,14 @@ const renderItem = ({ item }) => {
     <Item
       item={item}
       onPress={() => setSelectedId(item.id)}
-      backgroundColor={"#fff"}
     />
   );
 };
 
-export default Lists = ({ lists }) => {
+const Lists: React.FC<Props> = ({ lists }) => {
   let sortedLists = Object.keys(lists)
     .sort()
-    .map((keyword) => {
+    .map((keyword: string) => {
       return (
         <View style={[styles.listsContainer]} key={keyword}>
           <Text style={[styles.keywordTitle]}>{keyword}</Text>
@@ -56,3 +66,5 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
   },
 });
+
+export default Lists;

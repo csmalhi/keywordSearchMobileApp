@@ -3,7 +3,7 @@ import React from "react";
 import { Text } from "@react-native-material/core";
 
 
-export default Speech = () => (
+const Speech = () => (
   <View style={[styles.search]}>
     <Text style={[styles.searchText]}>
       You will see your speech dictation and keywords match up here
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export default Speech
