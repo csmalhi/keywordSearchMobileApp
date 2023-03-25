@@ -131,7 +131,9 @@ export type Props = {
 };
 const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   const [selected, setSelected] = useState(DATA.Lions[0]);
-  
+  const [editMode, setEditMode] = useState(false)
+  const [library, setLibrary] = useState(DATA)
+
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
@@ -142,8 +144,8 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media selectedItem={selected} edit={false} />
-      <Lists lists={DATA} setSelected={setSelected} />
+      <Media setSelected={setSelected} setEditMode={setEditMode} selectedItem={selected} editMode={editMode} />
+      <Lists lists={library} setSelected={setSelected} />
     </View>
   );
 }

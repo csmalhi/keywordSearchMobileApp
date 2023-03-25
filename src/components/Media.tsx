@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Edit from "./Edit";
 import { Text, Button, Chip, Flex } from "@react-native-material/core";
 import { Keyword } from "../models/keyword";
@@ -7,20 +7,23 @@ import { Resource } from "../models/resources";
 
 export type Props = {
   selectedItem: Resource;
-  edit: boolean
+  editMode: boolean
+  setEditMode: any;
+  setSelected: any;
 };
 
-const Media: React.FC<Props> = ({ selectedItem, edit }) => {
-  const [editMode, setEditMode] = useState(edit);
-  const [selected, setSelected] = useState(selectedItem)
+const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelected }) => {
+  useEffect(() => {
+    setEditMode(false);
+  },[selectedItem])
 
   let info;
   if (editMode) {
     info = <Edit
-    selectedItem={selected}
-    toggleEditMode={setEditMode}
-    setSelectedItem={setSelected}
-   />;
+      selectedItem={selectedItem}
+      setEditMode={setEditMode}
+      setSelectedItem={setSelected}
+    />;
   } else {
     info = (
       <View style={[styles.info]}>

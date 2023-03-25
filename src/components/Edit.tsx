@@ -4,12 +4,12 @@ import { StyleSheet, } from "react-native";
 import { Resource } from "../models/resources";
 
 export type Props = {
-  toggleEditMode: any;
+  setEditMode: any;
   setSelectedItem: any;
   selectedItem: Resource;
 };
 
-const Edit: React.FC<Props> = ({selectedItem, toggleEditMode, setSelectedItem }) => {
+const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem }) => {
   const [name, setName] = useState(selectedItem.name);
   const [description, setDescription] = useState(selectedItem.description);
   const [image, setImage] = useState(selectedItem.image);
@@ -20,10 +20,11 @@ const Edit: React.FC<Props> = ({selectedItem, toggleEditMode, setSelectedItem })
       name,
       description,
       image,
-      keywords,
-      id: ''
+      keywords: [{name: 'TODO REMOVE'}],
+      id: selectedItem.id
     }
     setSelectedItem(updatedResource)
+    setEditMode(false)
   }
 
   return (
@@ -54,7 +55,7 @@ const Edit: React.FC<Props> = ({selectedItem, toggleEditMode, setSelectedItem })
       />
       <Flex direction="row" justify="between">
         <Button title={'Cancel'}             
-          onPress={() => toggleEditMode(false)}
+          onPress={() => setEditMode(false)}
         ></Button>
         <Button title={'Save'}             
           onPress={() => onSave()}
