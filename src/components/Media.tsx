@@ -2,6 +2,8 @@ import { View, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
 import Edit from "./Edit";
 import { Text, Button, Chip, Flex } from "@react-native-material/core";
+import { Keyword } from "../models/keyword";
+import { Resource } from "../models/resources";
 
 export type Props = {
   selectedItem: Resource;
@@ -21,7 +23,7 @@ const Media: React.FC<Props> = ({ selectedItem, edit }) => {
         <Text style={[styles.description]}>{selectedItem.description}</Text>
         <Flex direction="row" justify="between">
           <Text style={[styles.keywords]}>
-            {selectedItem.keywords.map((keyword) => {
+            {selectedItem.keywords.map((keyword: Keyword) => {
               return <Chip key={keyword.name} label={keyword.name}></Chip>;
             })}
           </Text>
@@ -69,6 +71,11 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontFamily: "Roboto",
     marginBottom: 5,
+  },
+  keywords: {
+    fontSize: 8,
+    fontWeight: "300",
+    color: "#444",
   },
 });
 

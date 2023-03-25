@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar, StyleSheet, View, } from "react-native";
-import Lists from "./Lists";
-import Media from "./Media";
-import Speech from "./Speech";
+import Lists from "../components/Lists";
+import Media from "../components/Media";
+import Speech from "../components/Speech";
 
 const DATA = {
   Lions: [
@@ -130,6 +130,7 @@ export type Props = {
   route: any;
 };
 const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
+  const [selected, setSelected] = useState(DATA.Lions[0]);
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
@@ -140,13 +141,8 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media selectedItem={DATA.Lions[0]} edit={false} />
-      <Lists lists={DATA} />
-
-      {/* <Button
-        title="Create post"
-        onPress={() => navigation.navigate("CreatePost")}
-      /> */}
+      <Media selectedItem={selected} edit={false} />
+      <Lists lists={DATA} setSelected={setSelected} />
     </View>
   );
 }

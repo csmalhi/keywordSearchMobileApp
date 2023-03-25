@@ -6,7 +6,7 @@ import Router from "./src/pages/Router";
 
 const store = initStore();
 
-class NoteTaker extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,10 +21,10 @@ class NoteTaker extends Component {
   async loadFonts() {
     await Font.loadAsync({
       Fredoka: require("./assets/fonts/Fredoka.ttf"),
+      Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
       Inconsolata: require("./assets/fonts/Inconsolata.ttf"),
       JosefinSans: require("./assets/fonts/JosefinSans.ttf"),
       JosefinSansItalic: require("./assets/fonts/JosefinSansItalic.ttf"),
-      Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
     });
     this.setState({ fontsLoaded: true });
   }
@@ -42,4 +42,4 @@ class NoteTaker extends Component {
   }
 }
 
-export default NoteTaker;
+export default App;

@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
 import { Text } from "@react-native-material/core";
+import SpeechRecognitionScreen from "../services/speech.service";
 
 
 const Speech = () => (
@@ -8,6 +9,7 @@ const Speech = () => (
     <Text style={[styles.searchText]}>
       You will see your speech dictation and keywords match up here
     </Text>
+    <SpeechRecognitionScreen />
   </View>
 );
 

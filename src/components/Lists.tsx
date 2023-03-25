@@ -2,33 +2,27 @@ import { Text, View, FlatList, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import Item from "./Item";
 import { Library, Resource } from "../models/resources";
-import { Keyword } from "../models/keyword";
 
 export type RenderProps = {
   item: Resource;
-  setSelectedId: any;
+  setSelected: any;
 };
 
 export type Props = {
   lists: Library;
+  setSelected: any;
 };
 
-const renderItem: React.FC<RenderProps> = ({ item, setSelectedId }) => {
-  // const [selectedId, setSelectedId] = useState();
-
-  // const backgroundColor = item.id === selectedId ? "#222" : "#555";
-  // const color = item.id === selectedId ? "white" : "black";
+const renderItem: React.FC<RenderProps> = ({ item, setSelected }) => {
   return (
     <Item
       item={item}
-      onSelect={() => setSelectedId(item.id)}
+      onSelect={() => setSelected(item)}
     />
   );
 };
 
-const Lists: React.FC<Props> = ({ lists }) => {
-  const [selectedId, setSelectedId] = useState();
-
+const Lists: React.FC<Props> = ({ lists, setSelected }) => {
   let sortedLists = Object.keys(lists)
     .sort()
     .map((keyword: string) => {
@@ -37,10 +31,9 @@ const Lists: React.FC<Props> = ({ lists }) => {
           <Text style={[styles.keywordTitle]}>{keyword}</Text>
           <FlatList
             data={lists[keyword]}
-            renderItem={renderItem}
+            renderItem={({item}) => renderItem({item, setSelected})}
             keyExtractor={(item) => item.id}
             horizontal
-            width={"100%"}
           />
         </View>
       );
