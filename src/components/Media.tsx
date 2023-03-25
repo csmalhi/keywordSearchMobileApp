@@ -12,10 +12,15 @@ export type Props = {
 
 const Media: React.FC<Props> = ({ selectedItem, edit }) => {
   const [editMode, setEditMode] = useState(edit);
+  const [selected, setSelected] = useState(selectedItem)
 
   let info;
   if (editMode) {
-    info = <Edit toggleEditMode={setEditMode} />;
+    info = <Edit
+    selectedItem={selected}
+    toggleEditMode={setEditMode}
+    setSelectedItem={setSelected}
+   />;
   } else {
     info = (
       <View style={[styles.info]}>

@@ -131,6 +131,7 @@ export type Props = {
 };
 const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   const [selected, setSelected] = useState(DATA.Lions[0]);
+  
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`

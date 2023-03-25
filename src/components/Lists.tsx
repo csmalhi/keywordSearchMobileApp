@@ -24,7 +24,6 @@ const renderItem: React.FC<RenderProps> = ({ item, setSelected }) => {
 
 const Lists: React.FC<Props> = ({ lists, setSelected }) => {
   let sortedLists = Object.keys(lists)
-    .sort()
     .map((keyword: string) => {
       return (
         <View style={[styles.listsContainer]} key={keyword}>
