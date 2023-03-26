@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { connect } from "react-redux";
 import SearchComponent from "./Search";
+import AddComponent from "./Add";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -20,7 +21,7 @@ function Router() {
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="plus" color={color} size={26} />
           ),
-        }} name="Add New" component={SearchComponent} />
+        }} name="Add New" component={AddComponent} />
         <Tab.Screen options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="folder-multiple" color={color} size={26} />

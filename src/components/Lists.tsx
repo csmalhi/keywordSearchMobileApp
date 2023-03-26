@@ -2,6 +2,7 @@ import { Text, View, FlatList, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import Item from "./Item";
 import { Library, Resource } from "../models/resources";
+import { Flex } from "@react-native-material/core";
 
 export type RenderProps = {
   item: Resource;
@@ -26,7 +27,7 @@ const Lists: React.FC<Props> = ({ lists, setSelected }) => {
   let sortedLists = Object.keys(lists)
     .map((keyword: string) => {
       return (
-        <View style={[styles.listsContainer]} key={keyword}>
+        <Flex style={[styles.listsContainer]} key={keyword}>
           <Text style={[styles.keywordTitle]}>{keyword}</Text>
           <FlatList
             data={lists[keyword]}
@@ -34,7 +35,7 @@ const Lists: React.FC<Props> = ({ lists, setSelected }) => {
             keyExtractor={(item) => item.id}
             horizontal
           />
-        </View>
+        </Flex>
       );
     });
 

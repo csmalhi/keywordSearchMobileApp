@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Edit from "./Edit";
 import { Text, Button, Chip, Flex } from "@react-native-material/core";
 import { Keyword } from "../models/keyword";
@@ -26,7 +26,7 @@ const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelect
     />;
   } else {
     info = (
-      <View style={[styles.info]}>
+      <Flex style={[styles.info]}>
         <Text style={[styles.title]}>{selectedItem.name}</Text>
         <Text style={[styles.description]}>{selectedItem.description}</Text>
         <Flex direction="row" justify="between">
@@ -40,22 +40,22 @@ const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelect
             onPress={() => setEditMode(true)}
           />
         </Flex>
-      </View>
+      </Flex>
     );
   }
   return (
-    <View style={[styles.media]}>
+    <Flex style={[styles.media]}>
       <Image style={[styles.image]} source={{
         uri: selectedItem.image,
       }}></Image>
       {info}
-    </View>
+    </Flex>
   );
 };
 
 const styles = StyleSheet.create({
   media: {
-    height: 350,
+    height: 400,
     width: "100%",
     padding: 5,
     backgroundColor: "#fff",

@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Resource } from '../models/resources';
+import { Flex } from "@react-native-material/core";
 import { Keyword } from "../models/keyword";
 
 export type Props = {
@@ -13,12 +14,12 @@ const Item: React.FC<Props> = ({ item, onSelect }) => (
     <Image style={[styles.image]} source={{
           uri: item.image,
         }}></Image>
-    <View style={[styles.info]}>
+    <Flex style={[styles.info]}>
       <Text style={[styles.title]}>{item.name}</Text>
       <Text style={[styles.keywords]}>
         {item.keywords.map((keyword: Keyword) => keyword.name).join(", ")}
       </Text>
-    </View>
+    </Flex>
   </TouchableOpacity>
 );
 
