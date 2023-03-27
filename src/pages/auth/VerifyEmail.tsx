@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
-import { TextInput, Button, Flex, } from "@react-native-material/core";
+import { Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import {auth} from '../../firebase'
+import { sendEmailVerification } from "firebase/auth";
+import {auth} from '../../../firebase'
 
 type Props = {
   navigation: any;
@@ -24,11 +24,8 @@ const VerifyEmailComponent: React.FC<Props> = ({ navigation }) => {
         onPress={() => sendVerification()}
       ></Button>
       <Text>Please verify your email address.</Text>
-
       // TODO: if verified then enable sign in or create an auto sign in flow once verified
-      <Button title={'Sign In'}
-        onPress={() => navigation.navigate('SignIn')}
-      ></Button>
+      <Link to={'/SignIn'}>Go to Sign In</Link>
     </Flex>
   );
 }

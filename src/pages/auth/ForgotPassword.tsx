@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
-import { TextInput, Button, Flex, } from "@react-native-material/core";
+import { Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from '../../firebase'
+import { auth } from '../../../firebase'
 
 type Props = {
   navigation: any;
@@ -28,10 +28,7 @@ const ForgotPasswordComponent: React.FC<Props> = ({ navigation }) => {
         onPress={() => sendPasswordReset()}
       ></Button>
       <Text>Please verify your email address.</Text>
-
-      <Button title={'Sign In'}
-        onPress={() => navigation.navigate('SignIn')}
-      ></Button>
+      <Link to={'/SignIn'}>Go to Sign In</Link>
     </Flex>
   );
 }

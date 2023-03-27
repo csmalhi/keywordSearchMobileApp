@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
 import { TextInput, Button, Flex, } from "@react-native-material/core";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithCredential } from "firebase/auth";
+import {auth} from '../../../firebase'
 import { Link } from "@react-navigation/native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../../firebase'
-import { useNavigation } from '@react-navigation/native';
 
 type Props = {
   navigation: any;
 }
 
 const SignUpComponent: React.FC<Props> = ({ navigation }) => {
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -20,23 +18,16 @@ const SignUpComponent: React.FC<Props> = ({ navigation }) => {
       .then(() => {
         console.log("User account created & signed in!");
         navigation.navigate('Verify Email')
-
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
           console.log("That email address is already in use!");
         }
-
         if (error.code === "auth/invalid-email") {
           console.log("That email address is invalid!");
         }
-
         console.error(error);
       });
-  }
-
-  const googleSignIn = () => {
-    console.log('TODO: sign in w google btn')
   }
 
   return (
@@ -61,15 +52,8 @@ const SignUpComponent: React.FC<Props> = ({ navigation }) => {
       <Button title={'Sign Up'}
         onPress={() => signUp(email, password)}
       ></Button>
-      <Text>Or</Text>
-
-      <Button title={'Google Sign In'}
-        onPress={() => googleSignIn()}
-      ></Button>
       <Text>Already have an account?</Text>
-      <Button title={'Sign In'}
-        onPress={() => navigation.navigate('SignIn')}
-      ></Button>
+      <Link to={'/SignIn'}>Go to Sign In</Link>
     </Flex>
   );
 }

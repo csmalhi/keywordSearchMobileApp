@@ -1,12 +1,11 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SearchComponent from './Search';
-import AddComponent from './Add';
+import SearchComponent from '../Search';
+import AddComponent from '../Add';
 
 const Tab = createMaterialBottomTabNavigator();
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
 
 export default function UserStack() {
   return (

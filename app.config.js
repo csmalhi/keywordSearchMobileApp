@@ -19,7 +19,6 @@ export default {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "@react-native-google-signin/google-signin",
       [
         "@react-native-voice/voice",
         {

@@ -1,15 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { connect } from "react-redux";
-import AuthStack from "./AuthStack";
-import UserStack from "./UserStack";
-import { User } from "../models/user";
-import { onAuthStateChanged } from "firebase/auth";
+import AuthStack from "./auth/AuthStack";
+import UserStack from "./auth/UserStack";
 import {auth} from '../../firebase'
-
-// const { user } = useAuth();
-// const user = false
-
 
 const Router = () => {
   const [initializing, setInitializing] = useState(true);
@@ -17,7 +11,6 @@ const Router = () => {
 
   useEffect(() => {
     const subscriber = auth.onAuthStateChanged((user: any) => {
-      console.log('is there a user', user)
       if (user) setUser(user);
       if (initializing) setInitializing(false);
     }, (error) => {
@@ -30,10 +23,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       {
-        user ?
-          <UserStack /> 
-          :
-          <AuthStack />
+        user ? <UserStack /> : <AuthStack />
       }
     </NavigationContainer>
   );
@@ -42,7 +32,6 @@ const Router = () => {
 const mapStateToProps = (state: any) => ({
   state,
 });
-
 const mapDispatchToProps = (dispatch: any) => ({
   dispatch,
 });

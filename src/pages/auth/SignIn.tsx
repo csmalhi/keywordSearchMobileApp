@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
 import { TextInput, Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
-import {auth} from '../../firebase'
+import {auth} from '../../../firebase'
 import { signInWithEmailAndPassword } from "firebase/auth";
 type Props = {
   navigation: any;
@@ -27,10 +27,6 @@ const SignInComponent: React.FC<Props> = ({navigation}) => {
       });
   }
 
-  const googleSignIn = () => {
-    console.log('TODO: sign in w google btn')
-  }
-
   return (
     <Flex style={[styles.media]}>
       <TextInput
@@ -53,19 +49,9 @@ const SignInComponent: React.FC<Props> = ({navigation}) => {
       <Button title={'Sign In'}
         onPress={() => signIn(email, password)}
       ></Button>
-      <Text>Or</Text>
-
-      
-      <Button title={'Google Sign In'}
-        onPress={() => googleSignIn()}
-      ></Button>
-      <Button title={'Forgot Password?'}
-        onPress={() => navigation.navigate('ForgotPassword')}
-      ></Button>
+      <Link to={'/ForgotPassword'}>Forgot Password?</Link>
       <Text>Don't have an account?</Text>
-      <Button title={'Sign Up'}
-        onPress={() => navigation.navigate('SignUp')}
-      ></Button>
+      <Link to={'/SignUp'}>Go to Sign Up</Link>
     </Flex>
   );
 }
