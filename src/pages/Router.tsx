@@ -1,33 +1,40 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { connect } from "react-redux";
-import SearchComponent from "./Search";
-import AddComponent from "./Add";
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AuthStack from "./AuthStack";
+import UserStack from "./UserStack";
+import { User } from "../models/user";
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from '../../firebase'
 
-const Tab = createMaterialBottomTabNavigator();
+// const { user } = useAuth();
+// const user = false
 
-function Router() {
+
+const Router = () => {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    const subscriber = auth.onAuthStateChanged((user: any) => {
+      console.log('is there a user', user)
+      if (user) setUser(user);
+      if (initializing) setInitializing(false);
+    }, (error) => {
+      console.log(error)
+    });
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
   return (
     <NavigationContainer>
-      <Tab.Navigator >
-        <Tab.Screen options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home-search" color={color} size={26} />
-          ),
-        }} name="Search" component={SearchComponent} />
-        <Tab.Screen options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="plus" color={color} size={26} />
-          ),
-        }} name="Add New" component={AddComponent} />
-        <Tab.Screen options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="folder-multiple" color={color} size={26} />
-          ),
-        }} name="Library" component={SearchComponent} />
-      </Tab.Navigator>
+      {
+        user ?
+          <UserStack /> 
+          :
+          <AuthStack />
+      }
     </NavigationContainer>
   );
 }

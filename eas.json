@@ -1,0 +1,35 @@
+{
+  "scli": {
+    "version": ">= 3.8.1"
+  },
+  "sbuild": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    },
+    "sdevelopment-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "spreview": {
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    },
+    "sproduction": {
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    }
+  },
+  "ssubmit": {
+    "production": {}
+  }
+}

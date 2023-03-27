@@ -3,10 +3,14 @@ import { Provider } from "react-redux";
 import initStore from "./src/redux/store/store";
 import * as Font from "expo-font";
 import Router from "./src/pages/Router";
+import './firebase';
 
 const store = initStore();
 
-class App extends Component {
+type Props = { };
+type State = { fontsLoaded: boolean };
+
+class App extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {

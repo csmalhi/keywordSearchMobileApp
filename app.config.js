@@ -1,7 +1,10 @@
-{
+import 'dotenv/config';
+
+export default {
   "expo": {
+    "owner": "cmalhi",
+    "slug": "keywordsearchmobileapp",
     "name": "keywordSearchMobileApp",
-    "slug": "keywordSearchMobileApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,6 +19,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      "@react-native-google-signin/google-signin",
       [
         "@react-native-voice/voice",
         {
@@ -39,6 +43,17 @@
       },
       "permissions": ["android.permission.RECORD_AUDIO"],
       "package": "com.anonymous.keywordsearchmobileapp"
+    },
+    "extra": {
+      firebaseApiKey: process.env.FIREBASE_API_KEY,
+      firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
+      firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      firebaseAppId: process.env.FIREBASE_APP_ID,
+      "eas": {
+        "projectId": "cf6ae4a6-6826-45d8-a146-90e7c005f18e"
+      }
     }
   }
 }

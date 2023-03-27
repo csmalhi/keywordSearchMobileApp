@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar, StyleSheet, Image } from "react-native";
 import { Flex } from "@react-native-material/core";
-
-import Lists from "../components/Lists";
-import Media from "../components/Media";
-import Speech from "../components/Speech";
 import { Resource } from "../models/resources";
 import Edit from "../components/Edit";
 
