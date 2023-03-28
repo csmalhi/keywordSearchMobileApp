@@ -1,27 +1,18 @@
 import { Resource } from "../models/resources";
-import { mergeMap, of, take } from 'rxjs';
-import auth from "@react-native-firebase/auth";
-import firestore from '@react-native-firebase/firestore';
+import { mergeMap, of, take } from "rxjs";
 import { User } from "../models/user";
+import { getDoc, doc } from "firebase/firestore";
 
 const ResourceService = {
-    getResources: function() {
-        const userResources = auth().onAuthStateChanged((user) => {
-            const userRef: any= firestore()
-            .collection('users')
-            .doc(`${user?.uid}`);
-          return userRef.collection('resources').valueChanges().pipe(take(1));
-        })      
-        return userResources;
-    },
-    getResource: function(resourceId: string) {
-    },
-    addResource: function(resource: Resource) {
-    },
-    removeResource: function(resourceId: string) {
-    },
-    updateResource: function(resource: Resource) {
-    },
+  getResources: async function (auth: any, db: any) {
+    let userId = auth.currentUser.uid;
+    const aggregate = await getDoc(doc(db, `users/${userId}/aggregate/aggregate`))
+    return aggregate.data()
+  },
+  getResource: function (resourceId: string) {},
+  addResource: function (resource: Resource) {},
+  removeResource: function (resourceId: string) {},
+  updateResource: function (resource: Resource) {},
 };
 
 export default ResourceService;

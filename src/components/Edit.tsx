@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Stack, TextInput, Button, Flex  } from "@react-native-material/core";
 import { StyleSheet, } from "react-native";
 import { Resource } from "../models/resources";
+import {ChipsInput} from 'react-native-ui-lib'
 
 export type Props = {
   setEditMode: any;
   setSelectedItem: any;
   selectedItem: Resource;
+  onUpdateResource: any;
 };
 
-const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem }) => {
+const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem, onUpdateResource }) => {
   const [name, setName] = useState(selectedItem.name);
   const [description, setDescription] = useState(selectedItem.description);
   const [image, setImage] = useState(selectedItem.image);
@@ -25,6 +27,7 @@ const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem }) =>
     }
     setSelectedItem(updatedResource)
     setEditMode(false)
+    onUpdateResource(updatedResource)
   }
 
   return (
@@ -47,11 +50,10 @@ const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem }) =>
         value={image}
         onChangeText={setImage}
       />
-      <TextInput
-        label="Keywords"
-        variant="outlined"
-        value={keywords.toString()}
-        onChange={(value) => setKeywords([{name: value.nativeEvent.text}])}
+      <ChipsInput
+        placeholder={'keywords'}
+        chips={[{label: 'Falcon 9'}, {label: 'Enterprise'}, {label: 'Challenger'}]}
+        onChange={(value) => setKeywords(value.map(keyword => ({name: keyword.name})))}
       />
       <Flex direction="row" justify="between">
         <Button title={'Cancel'}             

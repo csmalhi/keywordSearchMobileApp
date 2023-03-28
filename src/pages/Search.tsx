@@ -3,6 +3,9 @@ import { StatusBar, StyleSheet, View, } from "react-native";
 import Lists from "../components/Lists";
 import Media from "../components/Media";
 import Speech from "../components/Speech";
+import ResourceService from "../services/resource.service";
+import {auth, db} from '../../firebase'
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const DATA = {
   Lions: [
@@ -135,16 +138,18 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   const [library, setLibrary] = useState(DATA)
 
   React.useEffect(() => {
-    if (route.params?.post) {
-      // Post updated, do something with `route.params.post`
-      // For example, send the post to the server
-    }
-  }, [route.params?.post]);
+    ResourceService.getResources(auth, db)
+  }, []);
+
+  const onUpdateResource = async (newResource: Resource) => {
+    setSelected(newResource);
+    const document = await setDoc(doc(db, `users/${auth.currentUser?.uid}/resources/${newResource.id}`), newResource).then(() => { console.log('Success updating resource')}).catch(error => console.log('error updating resource: ', error))
+  }
 
   return (
     <View style={[styles.container]}>
       <Speech />
-      <Media setSelected={setSelected} setEditMode={setEditMode} selectedItem={selected} editMode={editMode} />
+      <Media setSelected={setSelected} setEditMode={setEditMode} selectedItem={selected} editMode={editMode} onUpdateResource={onUpdateResource} />
       <Lists lists={library} setSelected={setSelected} />
     </View>
   );

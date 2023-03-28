@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { connect } from "react-redux";
 import AuthStack from "./auth/AuthStack";
 import UserStack from "./UserStack";
-import {auth} from '../../firebase'
+import { auth } from '../../firebase'
 
 const Router = () => {
   const [initializing, setInitializing] = useState(true);

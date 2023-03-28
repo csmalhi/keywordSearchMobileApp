@@ -10,9 +10,10 @@ export type Props = {
   editMode: boolean
   setEditMode: any;
   setSelected: any;
+  onUpdateResource: any
 };
 
-const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelected }) => {
+const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelected, onUpdateResource }) => {
   useEffect(() => {
     setEditMode(false);
   },[selectedItem])
@@ -23,6 +24,7 @@ const Media: React.FC<Props> = ({ selectedItem, editMode, setEditMode, setSelect
       selectedItem={selectedItem}
       setEditMode={setEditMode}
       setSelectedItem={setSelected}
+      onUpdateResource={onUpdateResource}
     />;
   } else {
     info = (
