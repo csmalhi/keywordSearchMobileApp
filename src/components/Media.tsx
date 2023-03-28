@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import React, { useEffect } from "react";
 import Edit from "./Edit";
 import { Text, Button, Chip, Flex } from "@react-native-material/core";

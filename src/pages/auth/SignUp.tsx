@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
 import { TextInput, Button, Flex, } from "@react-native-material/core";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithCredential } from "firebase/auth";
-import {auth} from '../../../firebase'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {auth, db} from '../../../firebase'
 import { Link } from "@react-navigation/native";
+import { User } from "../../models/user";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 type Props = {
   navigation: any;
@@ -16,6 +18,7 @@ const SignUpComponent: React.FC<Props> = ({ navigation }) => {
   const signUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
+        setUserData(auth.currentUser)
         console.log("User account created & signed in!");
         navigation.navigate('Verify Email')
       })
@@ -28,6 +31,17 @@ const SignUpComponent: React.FC<Props> = ({ navigation }) => {
         }
         console.error(error);
       });
+  }
+
+  const setUserData = async (user: any) => {
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    const collection = await setDoc(doc(db, `users/${user.uid}`), userData).then(() => { console.log('Success adding resource')}).catch(error => console.log('error adding resource: ', error))
   }
 
   return (

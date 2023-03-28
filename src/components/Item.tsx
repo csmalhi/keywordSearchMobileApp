@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Resource } from '../models/resources';
 import { Flex } from "@react-native-material/core";

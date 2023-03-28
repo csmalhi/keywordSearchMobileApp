@@ -3,7 +3,7 @@ import { StatusBar, StyleSheet, Text } from "react-native";
 import { Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
 import { sendEmailVerification } from "firebase/auth";
-import {auth} from '../../../firebase'
+import { auth } from '../../../firebase'
 
 type Props = {
   navigation: any;

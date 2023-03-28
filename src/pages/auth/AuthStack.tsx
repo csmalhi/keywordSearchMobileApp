@@ -9,9 +9,9 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="SignUp" component={SignUpComponent} />
+    <Stack.Navigator initialRouteName='SignIn'>
       <Stack.Screen name="SignIn" component={SignInComponent} />
+      <Stack.Screen name="SignUp" component={SignUpComponent} />
       <Stack.Screen name="VerifyEmail" component={VerifyEmailComponent} />
       <Stack.Screen name="ForgotPassword" component={ForgotPasswordComponent} />
     </Stack.Navigator>

@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SearchComponent from '../Search';
-import AddComponent from '../Add';
+import SearchComponent from './Search';
+import AddNewComponent from './AddNew';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -9,7 +9,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 export default function UserStack() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Search">
       <Tab.Screen options={{
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home-search" color={color} size={26} />
@@ -19,7 +19,7 @@ export default function UserStack() {
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="plus" color={color} size={26} />
         ),
-      }} name="AddNew" component={AddComponent} />
+      }} name="AddNew" component={AddNewComponent} />
       <Tab.Screen options={{
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="folder-multiple" color={color} size={26} />

@@ -3,12 +3,15 @@ import { StatusBar, StyleSheet, Image } from "react-native";
 import { Flex } from "@react-native-material/core";
 import { Resource } from "../models/resources";
 import Edit from "../components/Edit";
+import Add from "../components/Add";
+import {db, auth} from '../../firebase'
+import { addDoc, collection } from "firebase/firestore";
 
 export type Props = {
   navigation: any;
   route: any;
 };
-const AddComponent: React.FC<Props> = ({ navigation, route }) => {
+const AddNewComponent: React.FC<Props> = ({ navigation, route }) => {
   const [editMode, setEditMode] = useState(false)
   const [newResource, setNewResource] = useState<Resource>({
     id: '',
@@ -17,6 +20,7 @@ const AddComponent: React.FC<Props> = ({ navigation, route }) => {
     image: '',
     keywords: [{name: ''}]
   });
+  const user = auth.currentUser;
 
   React.useEffect(() => {
     if (route.params?.post) {
@@ -25,12 +29,17 @@ const AddComponent: React.FC<Props> = ({ navigation, route }) => {
     }
   }, [route.params?.post]);
 
+  const onAddResource = async (resource: Resource) => {
+    setNewResource(resource);
+    const doc = await addDoc(collection(db, `users/${user?.uid}/resources`), resource).then(() => { console.log('Success adding resource')}).catch(error => console.log('error adding resource: ', error))
+  }
+
   return (
     <Flex style={[styles.media]}>
     <Image style={[styles.image]} source={{
       uri: newResource.image ? newResource.image : 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png',
     }}></Image>
-    <Edit selectedItem={newResource} setEditMode={setEditMode} setSelectedItem={setNewResource}/>
+    <Add selectedItem={newResource} setEditMode={setEditMode} onAddResource={onAddResource}/>
   </Flex>
   );
 }
@@ -55,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddComponent;
+export default AddNewComponent;

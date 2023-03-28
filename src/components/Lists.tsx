@@ -1,5 +1,5 @@
-import { Text, View, FlatList, StyleSheet, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import React from "react";
 import Item from "./Item";
 import { Library, Resource } from "../models/resources";
 import { Flex } from "@react-native-material/core";
