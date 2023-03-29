@@ -18,7 +18,7 @@ const AddNewComponent: React.FC<Props> = ({ navigation, route }) => {
     name: '',
     description: '',
     image: '',
-    keywords: [{name: ''}]
+    keywords: []
   });
   const user = auth.currentUser;
 

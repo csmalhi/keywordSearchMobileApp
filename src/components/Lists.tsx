@@ -3,27 +3,35 @@ import React from "react";
 import Item from "./Item";
 import { Library, Resource } from "../models/resources";
 import { Flex } from "@react-native-material/core";
+import { Keyword } from "../models/keyword";
 
 export type RenderProps = {
   item: Resource;
   setSelected: any;
+  onEdit: any;
+  onDelete: any;
 };
 
 export type Props = {
   lists: Library;
   setSelected: any;
+  onEdit: any;
+  onDelete: any;
+  keywords: Keyword[];
 };
 
-const renderItem: React.FC<RenderProps> = ({ item, setSelected }) => {
+const renderItem: React.FC<RenderProps> = ({ item, setSelected, onEdit, onDelete }) => {
   return (
     <Item
+      onEdit={onEdit}
+      onDelete={onDelete}
       item={item}
       onSelect={() => setSelected(item)}
     />
   );
 };
 
-const Lists: React.FC<Props> = ({ lists, setSelected }) => {
+const Lists: React.FC<Props> = ({ lists, setSelected, onEdit, onDelete }) => {
   let sortedLists = Object.keys(lists)
     .map((keyword: string) => {
       return (
@@ -31,7 +39,7 @@ const Lists: React.FC<Props> = ({ lists, setSelected }) => {
           <Text style={[styles.keywordTitle]}>{keyword}</Text>
           <FlatList
             data={lists[keyword]}
-            renderItem={({item}) => renderItem({item, setSelected})}
+            renderItem={({item}) => renderItem({item, setSelected, onEdit, onDelete})}
             keyExtractor={(item) => item.id}
             horizontal
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchComponent from './Search';
 import AddNewComponent from './AddNew';
+import LibraryComponent from './Library'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function UserStack() {
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="folder-multiple" color={color} size={26} />
         ),
-      }} name="Library" component={SearchComponent} />
+      }} name="Library" component={LibraryComponent} />
     </Tab.Navigator>
   );
 }

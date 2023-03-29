@@ -5,7 +5,8 @@ import Media from "../components/Media";
 import Speech from "../components/Speech";
 import ResourceService from "../services/resource.service";
 import {auth, db} from '../../firebase'
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { Aggregate, Library } from "../models/resources";
 
 const DATA = {
   Lions: [
@@ -135,10 +136,27 @@ export type Props = {
 const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
   const [selected, setSelected] = useState(DATA.Lions[0]);
   const [editMode, setEditMode] = useState(false)
-  const [library, setLibrary] = useState(DATA)
+  const [library, setLibrary] = useState({})
+  const [keywords, setKeywords] = useState([{}])
+
+  const onEdit = (resource: Resource) => {
+    setSelected(resource)
+    setEditMode(true)
+  }
+
+  const onDelete = async (resource: Resource) => {
+    const document = await deleteDoc(doc(db, `users/${auth.currentUser?.uid}/resources/${resource.id}`)).then(() => { console.log('Success deleting resource')}).catch(error => console.log('error deleting resource: ', error))
+  }
+
+  const getResources = async () => {
+    let aggregate =  await ResourceService.getResources(auth, db) as Aggregate
+    console.log(aggregate)
+    setKeywords(aggregate.keywords)
+    setLibrary(aggregate.library)
+  }
 
   React.useEffect(() => {
-    ResourceService.getResources(auth, db)
+    getResources()
   }, []);
 
   const onUpdateResource = async (newResource: Resource) => {
@@ -146,13 +164,13 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
     const document = await setDoc(doc(db, `users/${auth.currentUser?.uid}/resources/${newResource.id}`), newResource).then(() => { console.log('Success updating resource')}).catch(error => console.log('error updating resource: ', error))
   }
 
-  return (
+  return library ? (
     <View style={[styles.container]}>
       <Speech />
       <Media setSelected={setSelected} setEditMode={setEditMode} selectedItem={selected} editMode={editMode} onUpdateResource={onUpdateResource} />
-      <Lists lists={library} setSelected={setSelected} />
+      <Lists onEdit={onEdit} onDelete={onDelete} lists={library} setSelected={setSelected} keywords={keywords}/>
     </View>
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({

@@ -22,7 +22,7 @@ const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem, onUp
       name,
       description,
       image,
-      keywords: [{name: 'TODO REMOVE'}],
+      keywords,
       id: selectedItem.id
     }
     setSelectedItem(updatedResource)
@@ -51,9 +51,11 @@ const Edit: React.FC<Props> = ({selectedItem, setEditMode, setSelectedItem, onUp
         onChangeText={setImage}
       />
       <ChipsInput
-        placeholder={'keywords'}
-        chips={[{label: 'Falcon 9'}, {label: 'Enterprise'}, {label: 'Challenger'}]}
-        onChange={(value) => setKeywords(value.map(keyword => ({name: keyword.name})))}
+        placeholder={'Keywords'}
+        chips={keywords.map(keyword => ({
+          label: keyword.name,
+        }))}
+        onChange={(value) => setKeywords(value.map((keyword: any) => ({name: keyword.label})))}
       />
       <Flex direction="row" justify="between">
         <Button title={'Cancel'}             

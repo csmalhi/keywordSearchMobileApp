@@ -14,5 +14,5 @@ export type Library = {
 
 export type Aggregate = {
   library: Library,
-  keywords: string[]
+  keywords: Keyword[]
 }

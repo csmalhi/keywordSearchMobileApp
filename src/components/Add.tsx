@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Stack, TextInput, Button, Flex  } from "@react-native-material/core";
 import { StyleSheet, } from "react-native";
 import { Resource } from "../models/resources";
+import {ChipsInput} from 'react-native-ui-lib'
 
 export type Props = {
   setEditMode: any;
@@ -20,7 +21,7 @@ const Add: React.FC<Props> = ({selectedItem, setEditMode, onAddResource }) => {
       name,
       description,
       image,
-      keywords: [{name: 'TODO REMOVE'}],
+      keywords,
       id: selectedItem.id
     }
     onAddResource(newResource)
@@ -47,11 +48,10 @@ const Add: React.FC<Props> = ({selectedItem, setEditMode, onAddResource }) => {
         value={image}
         onChangeText={setImage}
       />
-      <TextInput
-        label="Keywords"
-        variant="outlined"
-        value={keywords.toString()}
-        onChange={(value) => setKeywords([{name: value.nativeEvent.text}])}
+      <ChipsInput
+        placeholder={'Keywords'}
+        chips={keywords.map(keyword => ({label: keyword.name}))}
+        onChange={(value) => setKeywords(value.map((keyword: any) => ({name: keyword.label, style: {height: 40}})))}
       />
       <Flex direction="row" justify="between">
         <Button title={'Add'}             
