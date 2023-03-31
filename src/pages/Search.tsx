@@ -5,8 +5,9 @@ import Media from "../components/Media";
 import Speech from "../components/Speech";
 import ResourceService from "../services/resource.service";
 import {auth, db} from '../../firebase'
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore";
-import { Aggregate, Library } from "../models/resources";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { Aggregate, Resource } from "../models/resources";
+import { Keyword } from "../models/keyword";
 
 const DATA = {
   Lions: [
@@ -134,7 +135,7 @@ export type Props = {
   route: any;
 };
 const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
-  const [selected, setSelected] = useState(DATA.Lions[0]);
+  const [selected, setSelected] = useState(DATA.Lions[0] as Resource);
   const [editMode, setEditMode] = useState(false)
   const [library, setLibrary] = useState({})
   const [keywords, setKeywords] = useState([{}])
@@ -150,7 +151,6 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
 
   const getResources = async () => {
     let aggregate =  await ResourceService.getResources(auth, db) as Aggregate
-    console.log(aggregate)
     setKeywords(aggregate.keywords)
     setLibrary(aggregate.library)
   }
@@ -168,7 +168,7 @@ const SearchComponent: React.FC<Props> = ({ navigation, route }) => {
     <View style={[styles.container]}>
       <Speech />
       <Media setSelected={setSelected} setEditMode={setEditMode} selectedItem={selected} editMode={editMode} onUpdateResource={onUpdateResource} />
-      <Lists onEdit={onEdit} onDelete={onDelete} lists={library} setSelected={setSelected} keywords={keywords}/>
+      <Lists onEdit={onEdit} onDelete={onDelete} lists={library} setSelected={setSelected} keywords={keywords as Keyword[]}/>
     </View>
   ) : null;
 }

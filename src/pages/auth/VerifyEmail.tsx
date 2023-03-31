@@ -2,8 +2,8 @@ import React from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
 import { Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
-import { sendEmailVerification } from "firebase/auth";
 import { auth } from '../../../firebase'
+import UserService from "../../services/user.service";
 
 type Props = {
   navigation: any;
@@ -11,11 +11,9 @@ type Props = {
 
 const VerifyEmailComponent: React.FC<Props> = ({ navigation }) => {
   const sendVerification = () => {
-    if (auth.currentUser) {
-      sendEmailVerification(auth.currentUser).then(() => {
-        // this.router.navigate(['verify-email-address']);
-      });
-    }
+    // move user service import to router level
+    // TODO: if verified then enable sign in or create an auto sign in flow once verified
+    UserService.verifyEmail(auth, navigation)
   }
 
   return (
@@ -24,7 +22,6 @@ const VerifyEmailComponent: React.FC<Props> = ({ navigation }) => {
         onPress={() => sendVerification()}
       ></Button>
       <Text>Please verify your email address.</Text>
-      // TODO: if verified then enable sign in or create an auto sign in flow once verified
       <Link to={'/SignIn'}>Go to Sign In</Link>
     </Flex>
   );

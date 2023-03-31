@@ -1,7 +1,7 @@
 import { Keyword } from "./keyword";
 
 export interface Resource {
-  id: string;
+  id?: string;
   name: string;
   image: string;
   description: string;

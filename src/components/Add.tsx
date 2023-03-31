@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Stack, TextInput, Button, Flex  } from "@react-native-material/core";
 import { StyleSheet, } from "react-native";
 import { Resource } from "../models/resources";
-import {ChipsInput} from 'react-native-ui-lib'
+import { ChipsInput } from 'react-native-ui-lib'
 
 export type Props = {
   setEditMode: any;
@@ -22,7 +22,6 @@ const Add: React.FC<Props> = ({selectedItem, setEditMode, onAddResource }) => {
       description,
       image,
       keywords,
-      id: selectedItem.id
     }
     onAddResource(newResource)
     setEditMode(false)

@@ -3,7 +3,8 @@ import { StatusBar, StyleSheet, Text } from "react-native";
 import { TextInput, Button, Flex, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
 import {auth} from '../../../firebase'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import UserService from "../../services/user.service";
+
 type Props = {
   navigation: any;
 }
@@ -13,18 +14,7 @@ const SignInComponent: React.FC<Props> = ({navigation}) => {
   const [password, setPassword] = useState('')
 
   const signIn = (email: string, password: string) => {
-    // UserService.signIn(email, password)
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        console.log("User signed in!");
-      })
-      .catch((error) => {
-        if (error.code === "auth/invalid-email") {
-          console.log("That email address is invalid!");
-        }
-
-        console.error(error);
-      });
+    UserService.signIn(auth, email, password)
   }
 
   return (

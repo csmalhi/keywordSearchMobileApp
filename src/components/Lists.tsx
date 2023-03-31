@@ -40,7 +40,7 @@ const Lists: React.FC<Props> = ({ lists, setSelected, onEdit, onDelete }) => {
           <FlatList
             data={lists[keyword]}
             renderItem={({item}) => renderItem({item, setSelected, onEdit, onDelete})}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item?.id}
             horizontal
           />
         </Flex>

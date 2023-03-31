@@ -5,8 +5,9 @@ import Media from "../components/Media";
 import Speech from "../components/Speech";
 import ResourceService from "../services/resource.service";
 import {auth, db} from '../../firebase'
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { Aggregate, Library, Resource } from "../models/resources";
+import { Keyword } from "../models/keyword";
 
 export type Props = {
   navigation: any;
@@ -14,7 +15,6 @@ export type Props = {
 };
 const LibraryComponent: React.FC<Props> = ({ navigation, route }) => {
   const [selected, setSelected] = useState<Resource>({
-    id: '',
     name: '',
     description: '',
     image: '',

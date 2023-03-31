@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar, StyleSheet, Text } from "react-native";
-import { Button, Flex, } from "@react-native-material/core";
+import { Button, Flex, TextInput, } from "@react-native-material/core";
 import { Link } from "@react-navigation/native";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from '../../../firebase'
+import {auth} from '../../../firebase'
+import UserService from "../../services/user.service";
 
 type Props = {
   navigation: any;
 }
 
 const ForgotPasswordComponent: React.FC<Props> = ({ navigation }) => {
-  // TODO: get user email
-  const email = ''
+  const [email, setEmail] = useState('')
+
   const sendPasswordReset = () => {
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        console.log("Password reset email sent, check your inbox.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    UserService.forgotPassword(auth, email)
   }
 
   return (
     <Flex style={[styles.media]}>
+      <TextInput
+        label="Email"
+        variant="outlined"
+        value={email}
+        onChangeText={setEmail}
+        autoComplete="email"
+        autoFocus={true}
+        inputMode="email"
+      />
       <Button title={'Send Password Reset Email'}
         onPress={() => sendPasswordReset()}
       ></Button>

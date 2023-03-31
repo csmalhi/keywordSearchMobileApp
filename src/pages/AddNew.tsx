@@ -14,7 +14,6 @@ export type Props = {
 const AddNewComponent: React.FC<Props> = ({ navigation, route }) => {
   const [editMode, setEditMode] = useState(false)
   const [newResource, setNewResource] = useState<Resource>({
-    id: '',
     name: '',
     description: '',
     image: '',
